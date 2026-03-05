@@ -1,10 +1,11 @@
 const { writeFileSync } = require('fs');
-const { app } = require('../dist/main');
-const { SwaggerModule } = require('@nestjs/swagger');
+const { openApiDocument } = require('../dist/main');
 
 async function exportSpec() {
-  const document = SwaggerModule.createDocument(app, {});
-  writeFileSync('./openapi.json', JSON.stringify(document, null, 2));
+  if (!openApiDocument) {
+    throw new Error('OpenAPI document is not initialized');
+  }
+  writeFileSync('./openapi.json', JSON.stringify(openApiDocument, null, 2));
   process.exit(0);
 }
 
