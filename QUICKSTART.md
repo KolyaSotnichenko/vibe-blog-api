@@ -23,3 +23,14 @@ Run production build:
 ```
 npm run start:prod
 ```
+
+Environment variables:
+- Copy `.env.example` to `.env` if present and adjust values.
+
+Tests:
+```
+npm test
+```
+
+OpenAPI specification:
+- Generated file is available at `openapi.json` in the repository root.
