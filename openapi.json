@@ -5,6 +5,17 @@
     "version": "1.0.0",
     "description": "Initial OpenAPI specification for frontend development"
   },
-  "paths": {},
+  "paths": {
+    "/posts": {
+      "post": {
+        "summary": "Create post",
+        "responses": {
+          "201": {
+            "description": "Post created"
+          }
+        }
+      }
+    }
+  },
   "components": {}
 }
