@@ -5,10 +5,10 @@ export class CreatePostDto {
   @ApiProperty({ minLength: 1 })
   @IsString()
   @MinLength(1)
-  title: string;
+  title!: string;
 
   @ApiProperty({ minLength: 1 })
   @IsString()
   @MinLength(1)
-  content: string;
+  content!: string;
 }
