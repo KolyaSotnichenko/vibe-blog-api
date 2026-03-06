@@ -31,6 +31,21 @@
           },
           "404": { "description": "Not found" }
         }
+      },
+      "delete": {
+        "summary": "Delete post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Post deleted" },
+          "404": { "description": "Not found" }
+        }
       }
     }
     "/posts": {

@@ -31,4 +31,10 @@ export class PostsService {
     db.prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?').run(title, content, id);
     return { id, title, content };
   }
+
+  delete(id: number): boolean {
+    const stmt = db.prepare('DELETE FROM posts WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
 }
