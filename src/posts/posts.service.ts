@@ -51,4 +51,9 @@ export class PostsService {
     const existing = store.posts.find(p => p.id === id);
     return existing ?? null;
   }
+
+  findAll(): Post[] {
+    const store = fileStore.load();
+    return store.posts;
+  }
 }
