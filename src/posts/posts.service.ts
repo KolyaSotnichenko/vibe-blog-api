@@ -37,4 +37,11 @@ export class PostsService {
     const result = stmt.run(id);
     return result.changes > 0;
   }
+
+  findOne(id: number): Post | null {
+    const existing = db
+      .prepare('SELECT id, title, content FROM posts WHERE id = ?')
+      .get(id) as Post | undefined;
+    return existing ?? null;
+  }
 }

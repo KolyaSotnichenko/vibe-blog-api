@@ -83,4 +83,35 @@ describe('Posts (e2e)', () => {
       .delete('/posts/9999')
       .expect(404);
   });
+
+  it('gets an existing post by id', async () => {
+    const createRes = await request(app.getHttpServer())
+      .post('/posts')
+      .send({ title: 'Get me', content: 'Please' })
+      .expect(201);
+    const id = createRes.body.id;
+
+    const getRes = await request(app.getHttpServer())
+      .get(`/posts/${id}`)
+      .expect(200);
+
+    expect(getRes.body.id).toBe(id);
+    expect(getRes.body.title).toBe('Get me');
+    expect(getRes.body.content).toBe('Please');
+  });
+
+  it('returns 404 when getting missing post', async () => {
+    const res = await request(app.getHttpServer())
+      .get('/posts/999999')
+      .expect(404);
+
+    expect(res.body).toHaveProperty('error');
+    expect(res.body).toHaveProperty('code');
+  });
+
+  it('returns 400 on invalid id when getting post', async () => {
+    await request(app.getHttpServer())
+      .get('/posts/abc')
+      .expect(400);
+  });
 });
