@@ -1,4 +1,5 @@
-import { Body, Controller, Post, Put, Param, NotFoundException, Delete, HttpCode } from '@nestjs/common';
+import { Body, Controller, Post, Put, Param, NotFoundException, Delete, HttpCode, Get } from '@nestjs/common';
+import { ParseIntPipe } from '@nestjs/common';
 import { PostsService, Post as BlogPost } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -30,5 +31,14 @@ export class PostsController {
     if (!deleted) {
       throw new NotFoundException('Post not found');
     }
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): BlogPost {
+    const post = this.postsService.findOne(id);
+    if (!post) {
+      throw new NotFoundException({ error: 'Post not found', code: 'POST_NOT_FOUND' });
+    }
+    return post;
   }
 }
