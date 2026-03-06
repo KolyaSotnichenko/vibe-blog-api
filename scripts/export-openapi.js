@@ -1,5 +1,5 @@
 const { writeFileSync } = require('fs');
-const { openApiDocument } = require('../dist/main');
+const { openApiDocument } = require('../dist/src/main.js');
 
 async function exportSpec() {
   if (!openApiDocument) {
