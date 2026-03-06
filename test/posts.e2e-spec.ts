@@ -65,4 +65,21 @@ describe('Posts (e2e)', () => {
       .send({ title: '' })
       .expect(400);
   });
+
+  it('returns empty list initially', async () => {
+    const res = await request(app.getHttpServer()).get('/posts');
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
+
+  it('returns list with created post', async () => {
+    await request(app.getHttpServer())
+      .post('/posts')
+      .send({ title: 'List', content: 'Item' })
+      .expect(201);
+
+    const res = await request(app.getHttpServer()).get('/posts');
+    expect(res.status).toBe(200);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
 });
