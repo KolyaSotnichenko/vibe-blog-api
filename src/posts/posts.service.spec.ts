@@ -1,5 +1,5 @@
 import { PostsService, Post } from './posts.service';
-import { db } from '../db/sqlite';
+import { fileStore } from '../db/sqlite';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
@@ -7,7 +7,7 @@ describe('PostsService', () => {
   const service = new PostsService();
 
   beforeEach(() => {
-    db.exec('DELETE FROM posts');
+    fileStore.save({ posts: [] });
   });
 
   describe('create', () => {

@@ -14,7 +14,7 @@ async function bootstrap(): Promise<void> {
 
   openApiDocument = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, openApiDocument);
-  const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+  const port = process.env.PORT ? Number(process.env.PORT) : 0;
   await app.listen(port);
 }
 

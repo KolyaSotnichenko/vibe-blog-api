@@ -1,23 +1,31 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Database = require('better-sqlite3');
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 
-export const db = new Database('data.sqlite');
+const dataFile = join(process.cwd(), 'data.json');
 
-db.exec(`
-CREATE TABLE IF NOT EXISTS posts (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT NOT NULL,
-  content TEXT NOT NULL
-);
-`);
-import { DataSource } from 'typeorm';
-import { Post } from '../posts/post.entity';
+export interface StoredPost {
+  id: number;
+  title: string;
+  content: string;
+}
 
-export const sqliteDataSource = new DataSource({
-  type: 'sqlite',
-  database: 'db.sqlite',
-  entities: [Post],
-  // Migrations are disabled in dev to avoid ESM/CJS loading issues
-  migrations: [],
-  synchronize: false,
-});
+export interface Store {
+  posts: StoredPost[];
+}
+
+function loadStore(): Store {
+  if (!existsSync(dataFile)) {
+    return { posts: [] };
+  }
+  const raw = readFileSync(dataFile, 'utf8');
+  return JSON.parse(raw) as Store;
+}
+
+function saveStore(store: Store): void {
+  writeFileSync(dataFile, JSON.stringify(store, null, 2));
+}
+
+export const fileStore = {
+  load: loadStore,
+  save: saveStore,
+};
