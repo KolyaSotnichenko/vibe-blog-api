@@ -41,4 +41,9 @@ export class PostsController {
     }
     return post;
   }
+
+  @Get()
+  findAll(): BlogPost[] {
+    return this.postsService.findAll();
+  }
 }
