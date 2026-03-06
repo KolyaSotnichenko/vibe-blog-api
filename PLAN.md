@@ -10,3 +10,9 @@ Plan:
 - Validate input via existing DTOs
 - Update OpenAPI spec
 - Add e2e test for post creation
+Implement PUT /posts/:id endpoint
+- Update PostsController with PUT handler
+- Add update method to PostsService using SQLite
+- Validate UpdatePostDto
+- Update openapi.json
+- Add e2e tests for update post

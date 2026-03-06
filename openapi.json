@@ -6,6 +6,33 @@
     "description": "Initial OpenAPI specification for frontend development"
   },
   "paths": {
+    "/posts/{id}": {
+      "put": {
+        "summary": "Update post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdatePostDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated post"
+          },
+          "404": { "description": "Not found" }
+        }
+      }
+    }
     "/posts": {
       "post": {
         "summary": "Create post",
