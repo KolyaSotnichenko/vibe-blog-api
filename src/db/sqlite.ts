@@ -1,6 +1,7 @@
-import Database from 'better-sqlite3';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Database = require('better-sqlite3');
 
-export const db: Database.Database = new Database('data.sqlite');
+export const db = new Database('data.sqlite');
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS posts (
