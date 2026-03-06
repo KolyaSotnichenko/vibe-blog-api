@@ -16,3 +16,8 @@ Implement PUT /posts/:id endpoint
 - Validate UpdatePostDto
 - Update openapi.json
 - Add e2e tests for update post
+Implement GET /posts endpoint:
+- Add findAll method to PostsService returning Post[].
+- Add GET handler in PostsController.
+- Update openapi.json to include GET /posts.
+- Extend e2e tests for happy path and empty list.

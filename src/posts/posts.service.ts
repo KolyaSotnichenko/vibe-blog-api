@@ -9,6 +9,10 @@ export interface Post {
 }
 
 export class PostsService {
+  findAll(): Post[] {
+    const rows = db.prepare('SELECT id, title, content FROM posts ORDER BY id ASC').all() as Post[];
+    return rows;
+  }
   create(dto: CreatePostDto): Post {
     const stmt = db.prepare(
       'INSERT INTO posts (title, content) VALUES (?, ?)'

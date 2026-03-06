@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put, Param, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Post, Put, Param, NotFoundException, Get } from '@nestjs/common';
 import { PostsService, Post as BlogPost } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -20,5 +20,10 @@ export class PostsController {
       throw new NotFoundException('Post not found');
     }
     return updated;
+  }
+
+  @Get()
+  findAll(): BlogPost[] {
+    return this.postsService.findAll();
   }
 }
