@@ -17,6 +17,7 @@ export const sqliteDataSource = new DataSource({
   type: 'sqlite',
   database: 'db.sqlite',
   entities: [Post],
-  migrations: ['src/db/migrations/*.ts'],
+  // Migrations are disabled in dev to avoid ESM/CJS loading issues
+  migrations: [],
   synchronize: false,
 });
