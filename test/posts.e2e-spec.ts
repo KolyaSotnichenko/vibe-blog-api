@@ -65,4 +65,22 @@ describe('Posts (e2e)', () => {
       .send({ title: '' })
       .expect(400);
   });
+
+  it('deletes an existing post', async () => {
+    const createRes = await request(app.getHttpServer())
+      .post('/posts')
+      .send({ title: 'To delete', content: 'Soon' })
+      .expect(201);
+    const id = createRes.body.id;
+
+    await request(app.getHttpServer())
+      .delete(`/posts/${id}`)
+      .expect(204);
+  });
+
+  it('returns 404 when deleting missing post', async () => {
+    await request(app.getHttpServer())
+      .delete('/posts/9999')
+      .expect(404);
+  });
 });

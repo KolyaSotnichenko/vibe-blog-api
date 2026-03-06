@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put, Param, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Post, Put, Param, NotFoundException, Delete, HttpCode } from '@nestjs/common';
 import { PostsService, Post as BlogPost } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -20,5 +20,15 @@ export class PostsController {
       throw new NotFoundException('Post not found');
     }
     return updated;
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  remove(@Param('id') id: string): void {
+    const postId = Number(id);
+    const deleted = this.postsService.delete(postId);
+    if (!deleted) {
+      throw new NotFoundException('Post not found');
+    }
   }
 }
