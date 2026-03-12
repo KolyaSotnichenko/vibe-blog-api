@@ -3,7 +3,7 @@ import { TodosService } from './todos.service';
 
 @Controller('todos')
 export class TodosController {
-  private readonly service = new TodosService();
+  constructor(private readonly service: TodosService) {}
 
   @Get()
   getAll() {
