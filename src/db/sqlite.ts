@@ -10,7 +10,8 @@ export interface StoredPost {
 }
 
 export interface Store {
-  posts: StoredPost[];
+  posts?: StoredPost[];
+  todos?: unknown[];
 }
 
 function loadStore(): Store {

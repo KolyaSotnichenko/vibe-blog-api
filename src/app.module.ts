@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
-// Base application module
+import { TodosController } from './todos/todos.controller';
 
-@Module({})
+@Module({
+  controllers: [TodosController],
+})
 export class AppModule {}
